@@ -25,19 +25,6 @@ class Node:
             else:
                 self.right = Node(data)
         
-    def in_order_traversal(self):
-        tree_list = []
-
-        if self.left:
-            tree_list += self.left.in_order_traversal()
-
-        tree_list.append(self.data)
-
-        if self.right:
-            tree_list += self.right.in_order_traversal()
-        
-        return tree_list
-
     def search(self, val):
         if self.data == val:
             return True
@@ -56,6 +43,45 @@ class Node:
                 return False
         
 
+    def in_order_traversal(self):
+        tree_list = []
+
+        if self.left:
+            tree_list += self.left.in_order_traversal()
+
+        tree_list.append(self.data)
+
+        if self.right:
+            tree_list += self.right.in_order_traversal()
+        
+        return tree_list
+    
+    def pre_order_traversal(self):
+        tree_list = []
+
+        tree_list.append(self.data)
+
+        if self.left:
+            tree_list += self.left.pre_order_traversal()
+        
+        if self.right:
+            tree_list += self.right.pre_order_traversal()
+        
+        return tree_list
+    
+    def post_order_traversal(self):
+        tree_list = []
+
+        if self.left:
+            tree_list += self.left.post_order_traversal()
+        
+        if self.right:
+            tree_list += self.right.post_order_traversal()
+        
+        tree_list.append(self.data)
+
+        return tree_list
+
     
 
 
@@ -68,9 +94,11 @@ def build_tree(tree_list):
 
 
 if __name__ == '__main__':
-    numbers = [17, 4, 1, 20, 9, 23, 18, 34]
+    numbers = [8, 3, 10, 1, 6, 14, 4, 7, 13]
     numbers_tree = build_tree(numbers)
-    print(numbers_tree.in_order_traversal())
+    print('pre order traversal: ',numbers_tree.pre_order_traversal())
+    print('in order traversal: ',numbers_tree.in_order_traversal())
+    print('post order traversal: ',numbers_tree.post_order_traversal())
     print(numbers_tree.search(1))
     
 
