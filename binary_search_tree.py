@@ -39,19 +39,19 @@ class Node:
         return tree_list
 
     def search(self, val):
-        if val == self.data:
+        if self.data == val:
             return True
 
         if val < self.data:
             if self.left:
-                self.left.search(val)
+                return self.left.search(val)
             else:
                 return False
             
 
         else:
             if self.right:
-                self.right.search(val)
+                return self.right.search(val)
             else:
                 return False
         
