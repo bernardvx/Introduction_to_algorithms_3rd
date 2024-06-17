@@ -10,7 +10,7 @@ class MaxHeap:
                 self._siftdown(i)
 
     def _siftup(self, i):
-        parent = (i-2)//2
+        parent = (i-1)//2
         while i != 0 and self.heap[i] > self.heap[parent]:
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i] 
             i = parent
@@ -121,7 +121,51 @@ def heapsort(arr):
     return sorted_arr
 
 
+class PriorityQueue:
+
+    def __init__(self):
+        self.queue = MaxHeap()
+
+    def enqueue(self, element):
+        self.queue.insert(element)
+    
+    def peek(self):
+        return self.queue.get_max()
+    
+    def dequeue(self):
+        return self.queue.extract_max()
+    
+    def change_priority(self, i, new):
+        self.queue.update_index_val(i, new)
+
+    def is_empty(self):
+        return len(self.queue.heap) == 0
+
+
 arr = [8, 3, 10, 1, 6, 14, 4, 7, 13]
+
+
 
 print(arr)
 print('sorted array: ' ,heapsort(arr))
+
+
+q = PriorityQueue()
+
+print('\nis the queue empty:' , q.is_empty())
+
+for i in arr[:5]:
+    q.enqueue(i)
+    
+print('queue:', q.queue.heap)
+
+q.dequeue()
+
+print('queue after one dequeue:', q.queue.heap)
+
+print('the heighest priority queue', q.peek())
+
+q.change_priority(2, 20)
+
+print('queue after priority change:', q.queue.heap)
+print('\nis the queue empty:' , q.is_empty())
