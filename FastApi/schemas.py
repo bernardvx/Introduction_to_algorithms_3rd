@@ -8,11 +8,12 @@ class VideoBase(BaseModel):
 
 class VideoCreate(VideoBase):
     url : str
-    owner_id : str
+    
     
 
 class Video(VideoBase):
     id : int
+    
     
         
     class Config:
