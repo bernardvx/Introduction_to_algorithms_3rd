@@ -7,12 +7,13 @@ class VideoBase(BaseModel):
 
 
 class VideoCreate(VideoBase):
-    url : str
+    pass
     
     
 
 class Video(VideoBase):
     id : int
+    url : str
     
     
         
@@ -28,7 +29,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    username : str
+    name : str
 
 
 class User(UserBase):
