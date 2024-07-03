@@ -22,9 +22,9 @@ def get_db():
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_username(db, username=user.username)
-    if db_user:
-        raise HTTPException(status_code=400, detail="User already exists.")
+#    db_user = crud.create_user(db, user=user)
+ #   if db_user:
+ #       raise HTTPException(status_code=400, detail="User already exists.")
     crud.create_user(db=db, user=user)
     return crud.create_user(db=db, user=user) #{"users_name": user.name, "username": user.username}#, "user_id": db_user.id}
 
