@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+
 from . import crud, models, schemas
 from .database import SessionLocal, engine
 
@@ -42,7 +43,4 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
 @app.post("/users/{user_id}/videos", response_model=schemas.Video)
 def post_video_for_user(user_id : int, video: schemas.VideoCreate, db: Session = Depends(get_db)):
     return crud.upload_video(db=db, video=video, user_id=user_id)
-
-
-
 

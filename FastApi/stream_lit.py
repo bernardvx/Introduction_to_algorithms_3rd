@@ -3,7 +3,7 @@ import json
 import requests
 
 
-backend_url = "http://127.0.0.1:8000"
+backend_url = "http://fastapi:8000"
 
 st.title("fastapi Youtube")
 

@@ -1,0 +1,44 @@
+services:
+  fastapi:
+    build: .
+    container_name: fastapicontainer
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:mackintosh@db:5432/fastapi
+    command: uvicorn FastApi.main:app --host 0.0.0.0 --port 8000 --reload
+
+  streamlit:
+    build: .
+    container_name: streamlitcontainer
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+      - fastapi
+    environment:
+      - backend_url=http://fastapi:8000
+    command: streamlit run FastApi/stream_lit.py --server.port 8501
+
+
+      
+  
+
+
+  db:
+    image: postgres:13
+    container_name: postgres_db
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mackintosh
+      POSTGRES_DB: fastapi
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
